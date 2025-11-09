@@ -1,0 +1,86 @@
+# 项目目的
+
+通过Qt实现一个大型网络双人五子棋对弈游戏
+
+# 当前架构
+
+## 根目录核心文件夹结构
+
+```
+gomoku_project/
+├── core/                  # 核心业务模块（游戏逻辑、数据结构等，供多线程调用）
+│   ├── model/             # 数据模型（游戏状态、棋子、玩家信息等）
+│   │   ├── chess_board.h/cpp       # 棋盘数据结构（棋子位置、落子记录等）
+│   │   ├── chess_piece.h/cpp       # 棋子实体（类型、坐标、状态等）
+│   │   ├── game_state.h/cpp        # 游戏全局状态（当前回合、胜负判定等）
+│   │   └── player.h/cpp            # 玩家信息（ID、角色、网络状态等）
+│   ├── logic/             # 游戏逻辑处理（落子校验、胜负判断等）
+│   │   ├── game_rules.h/cpp        # 规则核心（五子连珠判定、禁手规则等）
+│   │   ├── move_validator.h/cpp    # 落子合法性校验（是否越界、已有棋子等）
+│   │   └── game_controller.h/cpp   # 逻辑控制器（协调规则与状态更新）
+│   └── common/            # 公共基础（枚举、常量、工具函数等）
+│       ├── define.h                # 全局常量（棋盘大小、端口号等）
+│       ├── enums.h                 # 枚举类型（棋子颜色、游戏状态等）
+│       └── utils.h/cpp             # 通用工具（坐标转换、日志等）
+
+├── thread/                # 线程管理模块（封装各线程及通信机制）
+│   ├── base_thread.h/cpp           # 线程基类（统一启动、停止、消息循环）
+│   ├── game_thread.h/cpp           # 游戏逻辑线程（处理落子、状态更新）
+│   ├── network_thread.h/cpp        # 网络线程（C/S通信、消息收发）
+│   └── resource_thread.h/cpp       # 资源加载线程（图片、音效等异步加载）
+
+├── network/               # 网络通信模块（C/S架构实现）
+│   ├── base/                      # 网络基础（套接字封装、协议基类）
+│   │   ├── socket_wrapper.h/cpp    # 跨平台套接字封装（TCP/UDP）
+│   │   └── network_protocol.h      # 通信协议定义（消息格式、指令类型）
+│   ├── client/                    # 客户端网络逻辑
+│   │   ├── client_handler.h/cpp    # 客户端连接管理、消息处理
+│   │   └── client_message.h/cpp    # 客户端消息封装/解析
+│   └── server/                    # 服务端网络逻辑（预留扩展）
+│       ├── server_handler.h/cpp    # 服务端连接管理、多客户端适配
+│       └── server_message.h/cpp    # 服务端消息封装/解析
+
+├── ui/                    # UI模块（主线程相关，Qt界面组件）
+│   ├── widgets/                   # 自定义UI组件
+│   │   ├── chess_board_widget.h/cpp # 棋盘绘制组件（响应点击、显示棋子）
+│   │   ├── piece_item.h/cpp        # 棋子UI元素（关联资源图片）
+│   │   └── game_info_panel.h/cpp   # 游戏信息面板（回合、玩家信息等）
+│   ├── windows/                   # 窗口类
+│   │   ├── main_window.h/cpp       # 主游戏窗口
+│   │   ├── login_window.h/cpp      # 登录/连接窗口
+│   │   └── settings_window.h/cpp   # 设置窗口（分辨率、音效等）
+│   └── ui_common/                 # UI公共工具
+│       ├── ui_event.h/cpp          # UI事件定义（与逻辑线程通信）
+│       └── style.h                 # 样式常量（颜色、尺寸等）
+
+├── resource/              # 资源管理模块（资源加载、缓存）
+│   ├── resource_manager.h/cpp      # 资源管理器（统一加载、缓存、释放）
+│   ├── image_loader.h/cpp          # 图片加载器（棋子、背景图等）
+│   └── resource_def.h              # 资源路径、类型定义
+
+└── msg/                   # 跨线程消息模块（线程间通信核心）
+    ├── message.h/cpp               # 消息基类（类型、数据载体）
+    ├── msg_type.h                  # 消息类型定义（落子请求、状态更新等）
+    └── msg_queue.h/cpp             # 线程安全消息队列（各线程间通信通道）
+```
+
+## 设计说明
+
+### 模块职责隔离
+
+- core/：纯业务逻辑，不依赖线程和 UI，供所有线程调用（如逻辑线程用game_rules判胜负，UI 线程用chess_board渲染棋盘）。
+- thread/：封装线程实体，每个线程对应一个类（如GameThread），内部包含消息循环，通过msg_queue与其他线程通信。
+- network/：分离客户端和服务端逻辑，便于后续扩展服务端功能（房间管理、观战等）。
+- ui/：仅依赖 Qt 框架，通过消息队列接收逻辑线程的状态更新，避免直接操作非 UI 线程数据。
+- msg/：统一跨线程通信格式，所有线程间交互必须通过消息队列，避免锁竞争和线程安全问题。
+
+### 可扩展性预留
+
+- 服务端模块（network/server/）提前占位，便于后续从双人对弈扩展为多人房间模式。
+- 资源模块（resource/）支持后续添加音效、动画等资源类型。
+- 游戏规则（core/logic/game_rules）独立，便于后续添加不同规则（如禁手、限时等）。
+
+### 线程通信流程
+
+- UI 线程（用户操作）→ 消息队列 → 游戏逻辑线程（处理落子）→ 消息队列 → 网络线程（发送给对手）。
+- 网络线程（接收对手消息）→ 消息队列 → 游戏逻辑线程（更新状态）→ 消息队列 → UI 线程（刷新界面）。
