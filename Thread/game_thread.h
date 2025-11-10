@@ -1,4 +1,4 @@
-#ifndef GAME_THREAD_H
+ï»¿#ifndef GAME_THREAD_H
 #define GAME_THREAD_H
 
 #include "base_thread.h"
@@ -7,17 +7,17 @@
 #include "../core/logic/move_validator.h"
 #include <memory>
 
-// Ç°ÖÃÉùÃ÷
+// å‰ç½®å£°æ˜
 class NetworkThread;
 
 class GameThread : public BaseThread {
 public:
     GameThread(std::shared_ptr<NetworkThread> networkThread);
 
-    // »ñÈ¡ÓÎÏ·×´Ì¬
+    // è·å–æ¸¸æˆçŠ¶æ€
     std::shared_ptr<GameState> getGameState() const { return m_gameState; }
 
-    // ÉèÖÃUIÏß³ÌµÄÏûÏ¢¶ÓÁĞ
+    // è®¾ç½®UIçº¿ç¨‹çš„æ¶ˆæ¯é˜Ÿåˆ—
     void setUiMsgQueue(std::shared_ptr<MsgQueue> queue) { m_uiMsgQueue = queue; }
 
 protected:
@@ -25,27 +25,27 @@ protected:
     void handleMessage(std::shared_ptr<Message> msg) override;
 
 private:
-    // ´¦ÀíÂä×ÓÇëÇó
+    // å¤„ç†è½å­è¯·æ±‚
     void handleMoveRequest(const MoveRequestMsg* moveMsg);
 
-    // ´¦ÀíÓÎÏ·¿ªÊ¼
+    // å¤„ç†æ¸¸æˆå¼€å§‹
     void handleGameStart();
 
-    // ´¦ÀíÓÎÏ·ÖØÆô
+    // å¤„ç†æ¸¸æˆé‡å¯
     void handleGameRestart();
 
-    // ´¦ÀíÍøÂçÊÕµ½µÄÂä×Ó
+    // å¤„ç†ç½‘ç»œæ”¶åˆ°çš„è½å­
     void handleNetworkMove(const QPoint& pos, PieceColor color);
 
-    // ·¢ËÍÏûÏ¢µ½UIÏß³Ì
+    // å‘é€æ¶ˆæ¯åˆ°UIçº¿ç¨‹
     void sendToUi(std::shared_ptr<Message> msg);
 
-    // ·¢ËÍÏûÏ¢µ½ÍøÂçÏß³Ì
+    // å‘é€æ¶ˆæ¯åˆ°ç½‘ç»œçº¿ç¨‹
     void sendToNetwork(std::shared_ptr<Message> msg);
 
-    std::shared_ptr<GameState> m_gameState;       // ÓÎÏ·×´Ì¬
-    std::shared_ptr<NetworkThread> m_networkThread; // ÍøÂçÏß³Ì
-    std::shared_ptr<MsgQueue> m_uiMsgQueue;       // UIÏß³ÌÏûÏ¢¶ÓÁĞ
+    std::shared_ptr<GameState> m_gameState;       // æ¸¸æˆçŠ¶æ€
+    std::shared_ptr<NetworkThread> m_networkThread; // ç½‘ç»œçº¿ç¨‹
+    std::shared_ptr<MsgQueue> m_uiMsgQueue;       // UIçº¿ç¨‹æ¶ˆæ¯é˜Ÿåˆ—
 };
 
 #endif // GAME_THREAD_H

@@ -1,4 +1,4 @@
-#ifndef BASE_THREAD_H
+ï»¿#ifndef BASE_THREAD_H
 #define BASE_THREAD_H
 
 #include <thread>
@@ -11,28 +11,28 @@ public:
     BaseThread();
     virtual ~BaseThread();
 
-    // Æô¶¯Ïß³Ì
+    // å¯åŠ¨çº¿ç¨‹
     void start();
 
-    // Í£Ö¹Ïß³Ì
+    // åœæ­¢çº¿ç¨‹
     void stop();
 
-    // ÅĞ¶ÏÏß³ÌÊÇ·ñÔËĞĞ
+    // åˆ¤æ–­çº¿ç¨‹æ˜¯å¦è¿è¡Œ
     bool isRunning() const { return m_running; }
 
-    // »ñÈ¡ÏûÏ¢¶ÓÁĞ£¨ÓÃÓÚÏò¸ÃÏß³Ì·¢ËÍÏûÏ¢£©
+    // è·å–æ¶ˆæ¯é˜Ÿåˆ—ï¼ˆç”¨äºå‘è¯¥çº¿ç¨‹å‘é€æ¶ˆæ¯ï¼‰
     std::shared_ptr<MsgQueue> getMsgQueue() const { return m_msgQueue; }
 
 protected:
-    // Ïß³ÌÖ÷Ñ­»·
+    // çº¿ç¨‹ä¸»å¾ªç¯
     virtual void run() = 0;
 
-    // ´¦ÀíÏûÏ¢£¨×ÓÀàÊµÏÖ£©
+    // å¤„ç†æ¶ˆæ¯ï¼ˆå­ç±»å®ç°ï¼‰
     virtual void handleMessage(std::shared_ptr<Message> msg) = 0;
 
-    std::atomic<bool> m_running;          // Ïß³ÌÔËĞĞ×´Ì¬
-    std::thread m_thread;                 // Ïß³Ì¶ÔÏó
-    std::shared_ptr<MsgQueue> m_msgQueue; // ÏûÏ¢¶ÓÁĞ
+    std::atomic<bool> m_running;          // çº¿ç¨‹è¿è¡ŒçŠ¶æ€
+    std::thread m_thread;                 // çº¿ç¨‹å¯¹è±¡
+    std::shared_ptr<MsgQueue> m_msgQueue; // æ¶ˆæ¯é˜Ÿåˆ—
 };
 
 #endif // BASE_THREAD_H

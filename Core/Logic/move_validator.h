@@ -1,4 +1,4 @@
-#ifndef MOVE_VALIDATOR_H
+ï»¿#ifndef MOVE_VALIDATOR_H
 #define MOVE_VALIDATOR_H
 
 #include "../model/chess_board.h"
@@ -7,13 +7,13 @@
 
 class MoveValidator {
 public:
-    // ÑéÖ¤Âä×ÓÊÇ·ñºÏ·¨
+    // éªŒè¯è½å­æ˜¯å¦åˆæ³•
     static bool isValidMove(const ChessBoard& board, const QPoint& pos, PieceColor color);
 
-    // ×ª»»ÆÁÄ»×ø±êµ½ÆåÅÌ×ø±ê
+    // è½¬æ¢å±å¹•åæ ‡åˆ°æ£‹ç›˜åæ ‡
     static QPoint screenToBoard(const QPoint& screenPos);
 
-    // ×ª»»ÆåÅÌ×ø±êµ½ÆÁÄ»×ø±ê
+    // è½¬æ¢æ£‹ç›˜åæ ‡åˆ°å±å¹•åæ ‡
     static QPoint boardToScreen(const QPoint& boardPos);
 };
 

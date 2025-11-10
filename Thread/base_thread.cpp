@@ -1,4 +1,4 @@
-#include "base_thread.h"
+﻿#include "base_thread.h"
 
 BaseThread::BaseThread() : m_running(false), m_msgQueue(std::make_shared<MsgQueue>()) {}
 

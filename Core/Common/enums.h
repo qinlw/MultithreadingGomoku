@@ -1,29 +1,29 @@
-#ifndef ENUMS_H
+ï»¿#ifndef ENUMS_H
 #define ENUMS_H
 
-// Æå×ÓÑÕÉ«
+// æ£‹å­é¢œè‰²
 enum class PieceColor {
-    None,   // ¿Õ
-    Black,  // ºÚÆå
-    White   // °×Æå
+    None,   // ç©º
+    Black,  // é»‘æ£‹
+    White   // ç™½æ£‹
 };
 
-// ÓÎÏ·×´Ì¬
+// æ¸¸æˆçŠ¶æ€
 enum class GameStatus {
-    NotStarted,  // Î´¿ªÊ¼
-    Playing,     // ½øĞĞÖĞ
-    Paused,      // ÔİÍ£
-    BlackWin,    // ºÚÆåÊ¤Àû
-    WhiteWin,    // °×ÆåÊ¤Àû
-    Draw         // Æ½¾Ö
+    NotStarted,  // æœªå¼€å§‹
+    Playing,     // è¿›è¡Œä¸­
+    Paused,      // æš‚åœ
+    BlackWin,    // é»‘æ£‹èƒœåˆ©
+    WhiteWin,    // ç™½æ£‹èƒœåˆ©
+    Draw         // å¹³å±€
 };
 
-// Íæ¼Ò½ÇÉ«
+// ç©å®¶è§’è‰²
 enum class PlayerRole {
-    None,     // Î´·ÖÅä
-    Black,    // ºÚÆåÍæ¼Ò
-    White,    // °×ÆåÍæ¼Ò
-    Spectator // ¹ÛÕ½Õß
+    None,     // æœªåˆ†é…
+    Black,    // é»‘æ£‹ç©å®¶
+    White,    // ç™½æ£‹ç©å®¶
+    Spectator // è§‚æˆ˜è€…
 };
 
 #endif // ENUMS_H

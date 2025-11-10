@@ -1,18 +1,18 @@
-#ifndef DEFINE_H
+ï»¿#ifndef DEFINE_H
 #define DEFINE_H
 
 #include <QPoint>
 
-// ÆåÅÌ³£Á¿
-const int BOARD_SIZE = 15;          // 15x15ÆåÅÌ
-const int CELL_SIZE = 40;           // Ã¿¸ö¸ñ×ÓÏñËØ´óĞ¡
-const QPoint BOARD_OFFSET(50, 50);  // ÆåÅÌ×óÉÏ½ÇÆ«ÒÆÁ¿
+// æ£‹ç›˜å¸¸é‡
+const int BOARD_SIZE = 15;          // 15x15æ£‹ç›˜
+const int CELL_SIZE = 40;           // æ¯ä¸ªæ ¼å­åƒç´ å¤§å°
+const QPoint BOARD_OFFSET(50, 50);  // æ£‹ç›˜å·¦ä¸Šè§’åç§»é‡
 
-// ÍøÂç³£Á¿
+// ç½‘ç»œå¸¸é‡
 const int SERVER_PORT = 12345;
 const QString DEFAULT_SERVER_IP = "127.0.0.1";
 
-// ×ÊÔ´Â·¾¶
+// èµ„æºè·¯å¾„
 const QString RESOURCE_PATH = ":/resource/";
 const QString BLACK_PIECE_PATH = RESOURCE_PATH + "black.png";
 const QString WHITE_PIECE_PATH = RESOURCE_PATH + "white.png";

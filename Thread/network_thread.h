@@ -1,23 +1,23 @@
-#ifndef NETWORK_THREAD_H
+ï»¿#ifndef NETWORK_THREAD_H
 #define NETWORK_THREAD_H
 
 #include "base_thread.h"
 #include <string>
 
-// Ç°ÖÃÉùÃ÷
+// å‰ç½®å£°æ˜
 class GameThread;
 
 class NetworkThread : public BaseThread {
 public:
     NetworkThread();
 
-    // ÉèÖÃÓÎÏ·Ïß³Ì
+    // è®¾ç½®æ¸¸æˆçº¿ç¨‹
     void setGameThread(std::shared_ptr<GameThread> gameThread) { m_gameThread = gameThread; }
 
-    // Á¬½Óµ½·şÎñÆ÷
+    // è¿æ¥åˆ°æœåŠ¡å™¨
     void connectToServer(const std::string& ip, int port);
 
-    // ¶Ï¿ªÁ¬½Ó
+    // æ–­å¼€è¿æ¥
     void disconnect();
 
 protected:
@@ -25,16 +25,16 @@ protected:
     void handleMessage(std::shared_ptr<Message> msg) override;
 
 private:
-    // ·¢ËÍÏûÏ¢µ½ÓÎÏ·Ïß³Ì
+    // å‘é€æ¶ˆæ¯åˆ°æ¸¸æˆçº¿ç¨‹
     void sendToGame(std::shared_ptr<Message> msg);
 
-    // ´¦Àí½ÓÊÕµ½µÄÍøÂçÊı¾İ
+    // å¤„ç†æ¥æ”¶åˆ°çš„ç½‘ç»œæ•°æ®
     void handleNetworkData(const char* data, int len);
 
-    std::shared_ptr<GameThread> m_gameThread; // ÓÎÏ·Ïß³Ì
-    bool m_connected;                         // Á¬½Ó×´Ì¬
-    std::string m_serverIp;                   // ·şÎñÆ÷IP
-    int m_serverPort;                         // ·şÎñÆ÷¶Ë¿Ú
+    std::shared_ptr<GameThread> m_gameThread; // æ¸¸æˆçº¿ç¨‹
+    bool m_connected;                         // è¿æ¥çŠ¶æ€
+    std::string m_serverIp;                   // æœåŠ¡å™¨IP
+    int m_serverPort;                         // æœåŠ¡å™¨ç«¯å£
 };
 
 #endif // NETWORK_THREAD_H

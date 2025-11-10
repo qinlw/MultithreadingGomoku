@@ -1,4 +1,4 @@
-#include "game_thread.h"
+ï»¿#include "game_thread.h"
 #include "network_thread.h"
 #include "../msg/message.h"
 #include "../core/common/enums.h"
@@ -27,7 +27,7 @@ void GameThread::handleMessage(std::shared_ptr<Message> msg) {
         handleGameRestart();
         break;
     case MsgType::NetworkMoveReceived:
-        // ÕâÀïĞèÒª¾ßÌåµÄÏûÏ¢½âÎö£¬ÔİÊ±¼ò»¯
+        // è¿™é‡Œéœ€è¦å…·ä½“çš„æ¶ˆæ¯è§£æï¼Œæš‚æ—¶ç®€åŒ–
         break;
     default:
         break;
@@ -39,32 +39,32 @@ void GameThread::handleMoveRequest(const MoveRequestMsg* moveMsg) {
     auto pos = moveMsg->pos();
     auto color = moveMsg->color();
 
-    // ÑéÖ¤Âä×ÓºÏ·¨ĞÔ
+    // éªŒè¯è½å­åˆæ³•æ€§
     if (!MoveValidator::isValidMove(board, pos, color)) {
-        // ·¢ËÍÂä×ÓÎŞĞ§ÏûÏ¢µ½UI
+        // å‘é€è½å­æ— æ•ˆæ¶ˆæ¯åˆ°UI
         return;
     }
 
-    // ·ÅÖÃÆå×Ó
+    // æ”¾ç½®æ£‹å­
     if (board.placePiece(pos, color)) {
-        // ¼ì²éÊÇ·ñ»ñÊ¤
+        // æ£€æŸ¥æ˜¯å¦è·èƒœ
         if (GameRules::isWin(board, pos.x(), pos.y(), color)) {
             GameStatus status = (color == PieceColor::Black) ?
                 GameStatus::BlackWin : GameStatus::WhiteWin;
             m_gameState->setStatus(status);
 
-            // ·¢ËÍÓÎÏ·½áÊøÏûÏ¢µ½UI
+            // å‘é€æ¸¸æˆç»“æŸæ¶ˆæ¯åˆ°UI
             sendToUi(std::make_shared<GameStateMsg>(status, pos));
-            // ·¢ËÍÓÎÏ·½áÊøÏûÏ¢µ½ÍøÂç
+            // å‘é€æ¸¸æˆç»“æŸæ¶ˆæ¯åˆ°ç½‘ç»œ
             sendToNetwork(std::make_shared<GameStateMsg>(status, pos));
         }
-        // ¼ì²éÊÇ·ñÆ½¾Ö
+        // æ£€æŸ¥æ˜¯å¦å¹³å±€
         else if (GameRules::isDraw(board)) {
             m_gameState->setStatus(GameStatus::Draw);
             sendToUi(std::make_shared<GameStateMsg>(GameStatus::Draw, pos));
             sendToNetwork(std::make_shared<GameStateMsg>(GameStatus::Draw, pos));
         }
-        // ÓÎÏ·¼ÌĞø
+        // æ¸¸æˆç»§ç»­
         else {
             m_gameState->switchPlayer();
             sendToUi(std::make_shared<GameStateMsg>(m_gameState->getStatus(), pos));
@@ -80,26 +80,26 @@ void GameThread::handleGameStart() {
 }
 
 void GameThread::handleGameRestart() {
-    handleGameStart(); // ÖØÆôÂß¼­Óë¿ªÊ¼ÀàËÆ
+    handleGameStart(); // é‡å¯é€»è¾‘ä¸å¼€å§‹ç±»ä¼¼
 }
 
 void GameThread::handleNetworkMove(const QPoint& pos, PieceColor color) {
     auto& board = m_gameState->getBoard();
 
     if (board.placePiece(pos, color)) {
-        // ¼ì²éÊÇ·ñ»ñÊ¤
+        // æ£€æŸ¥æ˜¯å¦è·èƒœ
         if (GameRules::isWin(board, pos.x(), pos.y(), color)) {
             GameStatus status = (color == PieceColor::Black) ?
                 GameStatus::BlackWin : GameStatus::WhiteWin;
             m_gameState->setStatus(status);
             sendToUi(std::make_shared<GameStateMsg>(status, pos));
         }
-        // ¼ì²éÊÇ·ñÆ½¾Ö
+        // æ£€æŸ¥æ˜¯å¦å¹³å±€
         else if (GameRules::isDraw(board)) {
             m_gameState->setStatus(GameStatus::Draw);
             sendToUi(std::make_shared<GameStateMsg>(GameStatus::Draw, pos));
         }
-        // ÓÎÏ·¼ÌĞø
+        // æ¸¸æˆç»§ç»­
         else {
             m_gameState->switchPlayer();
             sendToUi(std::make_shared<GameStateMsg>(m_gameState->getStatus(), pos));

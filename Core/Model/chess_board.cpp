@@ -1,4 +1,4 @@
-#include "chess_board.h"
+﻿#include "chess_board.h"
 
 ChessBoard::ChessBoard(int size) : m_size(size) {
     reset();

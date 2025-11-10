@@ -1,4 +1,4 @@
-#ifndef MESSAGE_H
+ï»¿#ifndef MESSAGE_H
 #define MESSAGE_H
 
 #include "msg_type.h"
@@ -17,7 +17,7 @@ protected:
     MsgType m_type;
 };
 
-// Âä×ÓÇëÇóÏûÏ¢
+// è½å­è¯·æ±‚æ¶ˆæ¯
 class MoveRequestMsg : public Message {
 public:
     MoveRequestMsg(QPoint pos, PieceColor color)
@@ -32,7 +32,7 @@ private:
     PieceColor m_color;
 };
 
-// ÓÎÏ·×´Ì¬¸üĞÂÏûÏ¢
+// æ¸¸æˆçŠ¶æ€æ›´æ–°æ¶ˆæ¯
 class GameStateMsg : public Message {
 public:
     GameStateMsg(GameStatus status, const QPoint& lastMove = QPoint(-1, -1))

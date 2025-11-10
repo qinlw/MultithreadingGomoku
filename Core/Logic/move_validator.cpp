@@ -1,19 +1,19 @@
-#include "move_validator.h"
+ï»¿#include "move_validator.h"
 #include "../common/define.h"
 #include "game_rules.h"
 
 bool MoveValidator::isValidMove(const ChessBoard& board, const QPoint& pos, PieceColor color) {
-    // ¼ì²éÎ»ÖÃÊÇ·ñÓĞĞ§
+    // æ£€æŸ¥ä½ç½®æ˜¯å¦æœ‰æ•ˆ
     if (!board.isValidPosition(pos)) {
         return false;
     }
 
-    // ¼ì²éÎ»ÖÃÊÇ·ñÒÑÓĞÆå×Ó
+    // æ£€æŸ¥ä½ç½®æ˜¯å¦å·²æœ‰æ£‹å­
     if (board.getPiece(pos) != PieceColor::None) {
         return false;
     }
 
-    // ¼ì²éÊÇ·ñÓĞ½ûÊÖ
+    // æ£€æŸ¥æ˜¯å¦æœ‰ç¦æ‰‹
     if (GameRules::hasForbiddenMove(board, pos.x(), pos.y(), color)) {
         return false;
     }
@@ -22,14 +22,14 @@ bool MoveValidator::isValidMove(const ChessBoard& board, const QPoint& pos, Piec
 }
 
 QPoint MoveValidator::screenToBoard(const QPoint& screenPos) {
-    // ¼ÆËãÆåÅÌ×ø±ê£¨¿¼ÂÇÆ«ÒÆÁ¿ºÍµ¥Ôª¸ñ´óĞ¡£©
+    // è®¡ç®—æ£‹ç›˜åæ ‡ï¼ˆè€ƒè™‘åç§»é‡å’Œå•å…ƒæ ¼å¤§å°ï¼‰
     int x = (screenPos.x() - BOARD_OFFSET.x()) / CELL_SIZE;
     int y = (screenPos.y() - BOARD_OFFSET.y()) / CELL_SIZE;
     return QPoint(x, y);
 }
 
 QPoint MoveValidator::boardToScreen(const QPoint& boardPos) {
-    // ¼ÆËãÆÁÄ»×ø±ê£¨ÖĞĞÄÎ»ÖÃ£©
+    // è®¡ç®—å±å¹•åæ ‡ï¼ˆä¸­å¿ƒä½ç½®ï¼‰
     int x = BOARD_OFFSET.x() + boardPos.x() * CELL_SIZE + CELL_SIZE / 2;
     int y = BOARD_OFFSET.y() + boardPos.y() * CELL_SIZE + CELL_SIZE / 2;
     return QPoint(x, y);

@@ -1,34 +1,34 @@
-#ifndef MSG_TYPE_H
+ï»¿#ifndef MSG_TYPE_H
 #define MSG_TYPE_H
 
-// ÏûÏ¢ÀàĞÍÃ¶¾Ù
+// æ¶ˆæ¯ç±»å‹æšä¸¾
 enum class MsgType {
-    // UI -> ÓÎÏ·Ïß³Ì
-    UIMoveRequest,       // Âä×ÓÇëÇó
-    UIGameStart,         // ¿ªÊ¼ÓÎÏ·
-    UIGameRestart,       // ÖØĞÂ¿ªÊ¼
-    UIGameQuit,          // ÍË³öÓÎÏ·
+    // UI -> æ¸¸æˆçº¿ç¨‹
+    UIMoveRequest,       // è½å­è¯·æ±‚
+    UIGameStart,         // å¼€å§‹æ¸¸æˆ
+    UIGameRestart,       // é‡æ–°å¼€å§‹
+    UIGameQuit,          // é€€å‡ºæ¸¸æˆ
 
-    // ÓÎÏ·Ïß³Ì -> UI
-    GameStateUpdated,    // ÓÎÏ·×´Ì¬¸üĞÂ
-    MoveValidated,       // Âä×ÓÑéÖ¤½á¹û
-    GameOver,            // ÓÎÏ·½áÊø
+    // æ¸¸æˆçº¿ç¨‹ -> UI
+    GameStateUpdated,    // æ¸¸æˆçŠ¶æ€æ›´æ–°
+    MoveValidated,       // è½å­éªŒè¯ç»“æœ
+    GameOver,            // æ¸¸æˆç»“æŸ
 
-    // ÓÎÏ·Ïß³Ì -> ÍøÂçÏß³Ì
-    NetworkSendMove,     // ·¢ËÍÂä×ÓĞÅÏ¢
-    NetworkSendGameState,// ·¢ËÍÓÎÏ·×´Ì¬
-    NetworkConnect,      // Á¬½ÓÇëÇó
-    NetworkDisconnect,   // ¶Ï¿ªÁ¬½Ó
+    // æ¸¸æˆçº¿ç¨‹ -> ç½‘ç»œçº¿ç¨‹
+    NetworkSendMove,     // å‘é€è½å­ä¿¡æ¯
+    NetworkSendGameState,// å‘é€æ¸¸æˆçŠ¶æ€
+    NetworkConnect,      // è¿æ¥è¯·æ±‚
+    NetworkDisconnect,   // æ–­å¼€è¿æ¥
 
-    // ÍøÂçÏß³Ì -> ÓÎÏ·Ïß³Ì
-    NetworkMoveReceived, // ÊÕµ½Âä×ÓĞÅÏ¢
-    NetworkConnected,    // Á¬½Ó³É¹¦
-    NetworkDisconnected, // Á¬½Ó¶Ï¿ª
-    NetworkError,        // ÍøÂç´íÎó
+    // ç½‘ç»œçº¿ç¨‹ -> æ¸¸æˆçº¿ç¨‹
+    NetworkMoveReceived, // æ”¶åˆ°è½å­ä¿¡æ¯
+    NetworkConnected,    // è¿æ¥æˆåŠŸ
+    NetworkDisconnected, // è¿æ¥æ–­å¼€
+    NetworkError,        // ç½‘ç»œé”™è¯¯
 
-    // ×ÊÔ´Ïß³ÌÏà¹Ø
-    ResourceLoadRequest, // ×ÊÔ´¼ÓÔØÇëÇó
-    ResourceLoaded       // ×ÊÔ´¼ÓÔØÍê³É
+    // èµ„æºçº¿ç¨‹ç›¸å…³
+    ResourceLoadRequest, // èµ„æºåŠ è½½è¯·æ±‚
+    ResourceLoaded       // èµ„æºåŠ è½½å®Œæˆ
 };
 
 #endif // MSG_TYPE_H

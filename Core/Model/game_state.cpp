@@ -1,4 +1,4 @@
-#include "game_state.h"
+﻿#include "game_state.h"
 
 GameState::GameState()
     : m_status(GameStatus::NotStarted),

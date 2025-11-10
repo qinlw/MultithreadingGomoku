@@ -1,4 +1,4 @@
-#ifndef GAME_STATE_H
+ï»¿#ifndef GAME_STATE_H
 #define GAME_STATE_H
 
 #include "chess_board.h"
@@ -9,37 +9,37 @@ class GameState {
 public:
     GameState();
 
-    // »ñÈ¡µ±Ç°ÓÎÏ·×´Ì¬
+    // è·å–å½“å‰æ¸¸æˆçŠ¶æ€
     GameStatus getStatus() const;
 
-    // ÉèÖÃÓÎÏ·×´Ì¬
+    // è®¾ç½®æ¸¸æˆçŠ¶æ€
     void setStatus(GameStatus status);
 
-    // »ñÈ¡µ±Ç°Íæ¼Ò
+    // è·å–å½“å‰ç©å®¶
     PieceColor getCurrentPlayer() const;
 
-    // ÇĞ»»µ±Ç°Íæ¼Ò
+    // åˆ‡æ¢å½“å‰ç©å®¶
     void switchPlayer();
 
-    // »ñÈ¡ÆåÅÌ
+    // è·å–æ£‹ç›˜
     ChessBoard& getBoard();
     const ChessBoard& getBoard() const;
 
-    // ÖØÖÃÓÎÏ·×´Ì¬
+    // é‡ç½®æ¸¸æˆçŠ¶æ€
     void reset();
 
-    // »ñÈ¡Íæ¼Ò½ÇÉ«
+    // è·å–ç©å®¶è§’è‰²
     PlayerRole getPlayerRole() const;
 
-    // ÉèÖÃÍæ¼Ò½ÇÉ«
+    // è®¾ç½®ç©å®¶è§’è‰²
     void setPlayerRole(PlayerRole role);
 
 private:
-    mutable std::mutex m_mutex;       // »¥³âËø£¬±£Ö¤Ïß³Ì°²È«
-    GameStatus m_status;              // ÓÎÏ·×´Ì¬
-    PieceColor m_currentPlayer;       // µ±Ç°»ØºÏÍæ¼Ò
-    ChessBoard m_board;               // ÆåÅÌ
-    PlayerRole m_playerRole;          // ±¾µØÍæ¼Ò½ÇÉ«
+    mutable std::mutex m_mutex;       // äº’æ–¥é”ï¼Œä¿è¯çº¿ç¨‹å®‰å…¨
+    GameStatus m_status;              // æ¸¸æˆçŠ¶æ€
+    PieceColor m_currentPlayer;       // å½“å‰å›åˆç©å®¶
+    ChessBoard m_board;               // æ£‹ç›˜
+    PlayerRole m_playerRole;          // æœ¬åœ°ç©å®¶è§’è‰²
 };
 
 #endif // GAME_STATE_H

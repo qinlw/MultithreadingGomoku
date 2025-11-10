@@ -1,4 +1,4 @@
-#ifndef MSG_QUEUE_H
+ï»¿#ifndef MSG_QUEUE_H
 #define MSG_QUEUE_H
 
 #include "message.h"
@@ -12,18 +12,18 @@ public:
     MsgQueue() = default;
     ~MsgQueue() = default;
 
-    // ½ûÖ¹¿½±´
+    // ç¦æ­¢æ‹·è´
     MsgQueue(const MsgQueue&) = delete;
     MsgQueue& operator=(const MsgQueue&) = delete;
 
-    // ¼ÓÈëÏûÏ¢
+    // åŠ å…¥æ¶ˆæ¯
     void push(std::shared_ptr<Message> msg) {
         std::lock_guard<std::mutex> lock(m_mutex);
         m_queue.push(msg);
         m_cond.notify_one();
     }
 
-    // È¡³öÏûÏ¢£¨×èÈûµÈ´ı£©
+    // å–å‡ºæ¶ˆæ¯ï¼ˆé˜»å¡ç­‰å¾…ï¼‰
     std::shared_ptr<Message> pop() {
         std::unique_lock<std::mutex> lock(m_mutex);
         m_cond.wait(lock, [this]() { return !m_queue.empty(); });
@@ -32,7 +32,7 @@ public:
         return msg;
     }
 
-    // ³¢ÊÔÈ¡³öÏûÏ¢£¨·Ç×èÈû£©
+    // å°è¯•å–å‡ºæ¶ˆæ¯ï¼ˆéé˜»å¡ï¼‰
     bool tryPop(std::shared_ptr<Message>& msg) {
         std::lock_guard<std::mutex> lock(m_mutex);
         if (m_queue.empty()) return false;
@@ -41,7 +41,7 @@ public:
         return true;
     }
 
-    // Çå¿Õ¶ÓÁĞ
+    // æ¸…ç©ºé˜Ÿåˆ—
     void clear() {
         std::lock_guard<std::mutex> lock(m_mutex);
         while (!m_queue.empty()) {

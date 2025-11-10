@@ -1,13 +1,13 @@
-#include "game_rules.h"
+ï»¿#include "game_rules.h"
 
 bool GameRules::isWin(const ChessBoard& board, int x, int y, PieceColor color) {
-    // ¼ì²é·½Ïò£ºË®Æ½¡¢´¹Ö±¡¢×óĞ±¡¢ÓÒĞ±
+    // æ£€æŸ¥æ–¹å‘ï¼šæ°´å¹³ã€å‚ç›´ã€å·¦æ–œã€å³æ–œ
     const int dirs[4][2] = { {1, 0}, {0, 1}, {1, 1}, {1, -1} };
 
     for (const auto& dir : dirs) {
-        int count = 1; // µ±Ç°Î»ÖÃÒÑÓĞÒ»¸öÆå×Ó
+        int count = 1; // å½“å‰ä½ç½®å·²æœ‰ä¸€ä¸ªæ£‹å­
 
-        // ÕıÏò¼ì²é
+        // æ­£å‘æ£€æŸ¥
         for (int i = 1; i < 5; ++i) {
             int nx = x + dir[0] * i;
             int ny = y + dir[1] * i;
@@ -19,7 +19,7 @@ bool GameRules::isWin(const ChessBoard& board, int x, int y, PieceColor color) {
             }
         }
 
-        // ·´Ïò¼ì²é
+        // åå‘æ£€æŸ¥
         for (int i = 1; i < 5; ++i) {
             int nx = x - dir[0] * i;
             int ny = y - dir[1] * i;
@@ -31,7 +31,7 @@ bool GameRules::isWin(const ChessBoard& board, int x, int y, PieceColor color) {
             }
         }
 
-        // Îå×ÓÁ¬Öé
+        // äº”å­è¿ç 
         if (count >= 5) {
             return true;
         }
@@ -44,20 +44,20 @@ bool GameRules::isDraw(const ChessBoard& board) {
     for (int i = 0; i < board.size(); ++i) {
         for (int j = 0; j < board.size(); ++j) {
             if (board.getPiece(i, j) == PieceColor::None) {
-                return false; // »¹ÓĞ¿ÕÎ»£¬²»ÊÇÆ½¾Ö
+                return false; // è¿˜æœ‰ç©ºä½ï¼Œä¸æ˜¯å¹³å±€
             }
         }
     }
-    return true; // ÆåÅÌÒÑÂú
+    return true; // æ£‹ç›˜å·²æ»¡
 }
 
 bool GameRules::hasForbiddenMove(const ChessBoard& board, int x, int y, PieceColor color) {
-    // ¼ò»¯°æ£º½ö¼ì²éÈıÈı½ûÊÖ£¨ºÚÆå£©
+    // ç®€åŒ–ç‰ˆï¼šä»…æ£€æŸ¥ä¸‰ä¸‰ç¦æ‰‹ï¼ˆé»‘æ£‹ï¼‰
     if (color != PieceColor::Black) {
         return false;
     }
 
-    // ÕâÀïÊµÏÖ¼ò»¯µÄÈıÈı½ûÊÖ¼ì²éÂß¼­
-    // Êµ¼ÊÏîÄ¿ÖĞĞèÒª¸ü¸´ÔÓµÄÅĞ¶¨Âß¼­
+    // è¿™é‡Œå®ç°ç®€åŒ–çš„ä¸‰ä¸‰ç¦æ‰‹æ£€æŸ¥é€»è¾‘
+    // å®é™…é¡¹ç›®ä¸­éœ€è¦æ›´å¤æ‚çš„åˆ¤å®šé€»è¾‘
     return false;
 }

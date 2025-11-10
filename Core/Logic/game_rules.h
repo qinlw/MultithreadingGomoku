@@ -1,4 +1,4 @@
-#ifndef GAME_RULES_H
+ï»¿#ifndef GAME_RULES_H
 #define GAME_RULES_H
 
 #include "../model/chess_board.h"
@@ -6,13 +6,13 @@
 
 class GameRules {
 public:
-    // ÅĞ¶ÏÖ¸¶¨Î»ÖÃÂä×ÓºóÊÇ·ñ»ñÊ¤
+    // åˆ¤æ–­æŒ‡å®šä½ç½®è½å­åæ˜¯å¦è·èƒœ
     static bool isWin(const ChessBoard& board, int x, int y, PieceColor color);
 
-    // ÅĞ¶ÏÊÇ·ñÆ½¾Ö£¨ÆåÅÌÒÑÂú£©
+    // åˆ¤æ–­æ˜¯å¦å¹³å±€ï¼ˆæ£‹ç›˜å·²æ»¡ï¼‰
     static bool isDraw(const ChessBoard& board);
 
-    // ¼ì²éÊÇ·ñÓĞ½ûÊÖ£¨¼ò»¯°æ£¬½ö¼ì²é»ù±¾½ûÊÖ£©
+    // æ£€æŸ¥æ˜¯å¦æœ‰ç¦æ‰‹ï¼ˆç®€åŒ–ç‰ˆï¼Œä»…æ£€æŸ¥åŸºæœ¬ç¦æ‰‹ï¼‰
     static bool hasForbiddenMove(const ChessBoard& board, int x, int y, PieceColor color);
 };
 

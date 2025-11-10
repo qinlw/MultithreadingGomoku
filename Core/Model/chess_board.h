@@ -1,4 +1,4 @@
-#ifndef CHESS_BOARD_H
+ï»¿#ifndef CHESS_BOARD_H
 #define CHESS_BOARD_H
 
 #include "../common/enums.h"
@@ -10,31 +10,31 @@ class ChessBoard {
 public:
     ChessBoard(int size = BOARD_SIZE);
 
-    // ÖØÖÃÆåÅÌ
+    // é‡ç½®æ£‹ç›˜
     void reset();
 
-    // »ñÈ¡Ö¸¶¨Î»ÖÃµÄÆå×Ó
+    // è·å–æŒ‡å®šä½ç½®çš„æ£‹å­
     PieceColor getPiece(int x, int y) const;
     PieceColor getPiece(const QPoint& pos) const;
 
-    // ·ÅÖÃÆå×Ó
+    // æ”¾ç½®æ£‹å­
     bool placePiece(int x, int y, PieceColor color);
     bool placePiece(const QPoint& pos, PieceColor color);
 
-    // ¼ì²éÎ»ÖÃÊÇ·ñÓĞĞ§
+    // æ£€æŸ¥ä½ç½®æ˜¯å¦æœ‰æ•ˆ
     bool isValidPosition(int x, int y) const;
     bool isValidPosition(const QPoint& pos) const;
 
-    // »ñÈ¡ÆåÅÌ´óĞ¡
+    // è·å–æ£‹ç›˜å¤§å°
     int size() const { return m_size; }
 
-    // »ñÈ¡×îºóÂä×ÓÎ»ÖÃ
+    // è·å–æœ€åè½å­ä½ç½®
     QPoint lastMove() const { return m_lastMove; }
 
 private:
-    int m_size;                          // ÆåÅÌ´óĞ¡
-    std::vector<std::vector<PieceColor>> m_board; // ÆåÅÌÊı¾İ
-    QPoint m_lastMove;                   // ×îºóÂä×ÓÎ»ÖÃ
+    int m_size;                          // æ£‹ç›˜å¤§å°
+    std::vector<std::vector<PieceColor>> m_board; // æ£‹ç›˜æ•°æ®
+    QPoint m_lastMove;                   // æœ€åè½å­ä½ç½®
 };
 
 #endif // CHESS_BOARD_H
